@@ -3,6 +3,21 @@
 #include <iostream>
 #include <ctime>
 
+void rand_ins(int a[]) {
+    for (int i = 0; i < 30; ++i) {
+        a[i] = std::rand() % 201 - 100;
+        std::cout << a[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+void show_a(int a[]) {
+    for (int i = 0; i < 30; ++i) {
+        std::cout << a[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
 void cocktail(int arr[], int n) {
     int8_t f = 1;
     int strt = 0;
@@ -87,36 +102,15 @@ int main()
 {
     int a[30];
     std::srand(std::time(nullptr));
-    for (int i = 0; i < 30; ++i) {
-        a[i] = std::rand() % 201 - 100;
-        std::cout << a[i] << " ";
-    }
-    std::cout << std::endl;
+    rand_ins(a);
     cocktail(a, 30);
-    for (int i = 0; i < 30; ++i) {
-        std::cout << a[i] << " ";
-    }
-    std::cout << std::endl;
-    for (int i = 0; i < 30; ++i) {
-        a[i] = std::rand() % 201 - 100;
-        std::cout << a[i] << " ";
-    }
-    std::cout << std::endl;
+    show_a(a);
+    rand_ins(a);
     merge_s(a, 0, 30 - 1);
-    for (int i = 0; i < 30; ++i) {
-        std::cout << a[i] << " ";
-    }
-    std::cout << std::endl;
-    for (int i = 0; i < 30; ++i) {
-        a[i] = std::rand() % 201 - 100;
-        std::cout << a[i] << " ";
-    }
-    std::cout << std::endl;
+    show_a(a);
+    rand_ins(a);
     shell(a, 30);
-    for (int i = 0; i < 30; ++i) {
-        std::cout << a[i] << " ";
-    }
-    std::cout << std::endl;
+    show_a(a);
     return 0;
 }
 
