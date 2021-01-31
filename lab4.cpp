@@ -2,24 +2,26 @@
 
 #include <iostream>
 #include <ctime>
+#include <vector>
 
-void rand_ins(int a[]) {
+void rand_ins(std::vector<int>& a) {
+    a.clear();
     for (int i = 0; i < 30; ++i) {
-        a[i] = std::rand() % 201 - 100;
+        a.push_back(std::rand() % 201 - 100);
         std::cout << a[i] << " ";
     }
     std::cout << std::endl;
 }
 
-void show_a(int a[]) {
-    for (int i = 0; i < 30; ++i) {
-        std::cout << a[i] << " ";
+void show_a(std::vector<int>& a) {
+    for (int i : a) {
+        std::cout << i << " ";
     }
     std::cout << std::endl;
 }
 
-void cocktail(int arr[], int n) {
-    int8_t f = 1;
+void cocktail(std::vector<int>& arr, int n) {
+    bool f = 1;
     int strt = 0;
     int end = n - 1;
     while (f) {
@@ -46,9 +48,9 @@ void cocktail(int arr[], int n) {
     }        
 }
 
-void merge_o(int [], int, int, int);
+void merge_o(std::vector<int>& arr, int, int, int);
 
-void merge_s(int arr[], int l, int h) {
+void merge_s(std::vector<int>& arr, int l, int h) {
     int mid;
     if (l < h) {
         mid = (l + h) / 2;
@@ -56,11 +58,11 @@ void merge_s(int arr[], int l, int h) {
         merge_s(arr, mid + 1, h);
         merge_o(arr, l, h, mid);
     }
- 
 }
 
-void merge_o(int arr[], int l, int h, int mid) {
-    int i, j, k, c[50];
+void merge_o(std::vector<int>& arr, int l, int h, int mid) {
+    int i, j, k;
+    int* c = new int[arr.size()];
     i = l;
     k = i;
     j = mid + 1;
@@ -85,9 +87,10 @@ void merge_o(int arr[], int l, int h, int mid) {
         j++;
     }
     for (int y = l; y < k; ++y) arr[y] = c[y];
+    delete c;
 }
 
-void shell(int arr[], int n) {
+void shell(std::vector<int>& arr, int n) {
     for (int gap = n / 2; gap > 0; gap /= 2) {
         for (int i = gap; i < n; ++i) {
             int tmp = arr[i];
@@ -100,17 +103,18 @@ void shell(int arr[], int n) {
 
 int main()
 {
-    int a[30];
+    std::vector<int> a;
     std::srand(std::time(nullptr));
     rand_ins(a);
-    cocktail(a, 30);
+    cocktail(a, a.size());
     show_a(a);
     rand_ins(a);
-    merge_s(a, 0, 30 - 1);
+    merge_s(a, 0, a.size() - 1);
     show_a(a);
     rand_ins(a);
-    shell(a, 30);
+    shell(a, a.size());
     show_a(a);
+    std::cout << std::endl;
     return 0;
 }
 
